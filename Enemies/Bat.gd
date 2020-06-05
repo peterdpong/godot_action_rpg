@@ -22,6 +22,7 @@ var state = IDLE
 onready var sprite = $Sprite
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
+onready var hurtBox = $Hurtbox
 
 
 func _physics_process(delta):
@@ -56,7 +57,7 @@ func seekPlayer():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	
+	hurtBox.create_hit_effect()
 	var knockback_direction = get_node("Hurtbox").global_position - area.get_parent().global_position
 	knockback_direction = knockback_direction.normalized()
 	knockback = knockback_direction * knockback_speed
